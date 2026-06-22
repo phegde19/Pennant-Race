@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react";
 import { getStandings } from "../services/mlbApi";
 
-import StandingsTable from "../components/StandingsTable";
 import PredictionCard from "../components/PredictionCard";
 import WinsChart from "../components/WinsChart";
+import StandingsView from "../components/StandingsView";
+
+const divisionNames = {
+  201: "AL East",
+  202: "AL Central",
+  200: "AL West",
+  204: "NL East",
+  205: "NL Central",
+  203: "NL West"
+};
 
 export default function Dashboard() {
   const [teams, setTeams] = useState([]);
@@ -23,15 +32,38 @@ export default function Dashboard() {
           const projectedWins =
             team.wins + gamesRemaining * winPct;
 
-          return {
-            name: team.team.name,
-            wins: team.wins,
-            losses: team.losses,
-            winPct,
-            projectedWins,
-            projectedLosses:
-              162 - projectedWins
-          };
+            return {
+              id: team.team.id,
+              name: team.team.name,
+            
+              wins: team.wins,
+              losses: team.losses,
+            
+              pct: (
+                team.wins /
+                (team.wins + team.losses)
+              ).toFixed(3),
+            
+              projectedWins:
+                Math.round(projectedWins),
+            
+              projectedLosses:
+                Math.round(
+                  162 - projectedWins
+                ),
+            
+              winPct,
+            
+              division:
+                divisionNames[
+                  record.division.id
+                ],
+            
+              league:
+                record.league.id === 103
+                  ? "AL"
+                  : "NL"
+            };
         })
       );
 
@@ -45,20 +77,19 @@ export default function Dashboard() {
     return <h2>Loading...</h2>;
   }
 
-  const sorted =
-    [...teams].sort(
-      (a, b) =>
-        b.projectedWins - a.projectedWins
-    );
+  const sorted = [...teams].sort(
+    (a, b) =>
+      b.projectedWins - a.projectedWins
+  );
 
   const best = sorted[0];
-  const worst = sorted[sorted.length - 1];
+  const worst =
+    sorted[sorted.length - 1];
 
   return (
     <div className="container">
       <header className="hero">
         <h1>⚾ Pennant Predictor</h1>
-
         <p>
           Forecasting MLB's race to October
         </p>
@@ -96,7 +127,7 @@ export default function Dashboard() {
 
       <WinsChart teams={teams} />
 
-      <StandingsTable teams={teams} />
+      <StandingsView teams={teams} />
     </div>
   );
 }
