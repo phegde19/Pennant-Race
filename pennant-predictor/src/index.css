@@ -200,7 +200,7 @@ body {
   display: grid;
 
   grid-template-columns:
-    40px 40px 60px 50px 55px;
+    45px 45px 65px 65px 55px;
 
   gap: .5rem;
 

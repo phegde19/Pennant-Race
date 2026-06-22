@@ -1,16 +1,12 @@
 import { useState } from "react";
 
 export default function StandingsView({ teams }) {
-  const [league, setLeague] =
-    useState("AL");
+  const [league, setLeague] = useState("AL");
+  const [view, setView] = useState("regular");
 
-  const [view, setView] =
-    useState("regular");
-
-  const filtered =
-    teams.filter(
-      team => team.league === league
-    );
+  const filtered = teams.filter(
+    team => team.league === league
+  );
 
   const divisions =
     league === "AL"
@@ -48,6 +44,9 @@ export default function StandingsView({ teams }) {
           )
       )
       .sort(sortByRecord);
+
+  const thirdWildCard =
+    wildCardTeams[2];
 
   return (
     <div className="standings-view">
@@ -220,6 +219,18 @@ export default function StandingsView({ teams }) {
               Division Leaders
             </h2>
 
+            <div className="division-header">
+              <span>Team</span>
+
+              <div className="stats-header">
+                <span>W</span>
+                <span>L</span>
+                <span>PCT</span>
+                <span></span>
+                <span>PROJ</span>
+              </div>
+            </div>
+
             {divisionWinners.map(
               team => (
                 <div
@@ -229,10 +240,13 @@ export default function StandingsView({ teams }) {
                   <div className="division-team">
                     <img
                       src={`https://www.mlbstatic.com/team-logos/${team.id}.svg`}
+                      alt={team.name}
                       className="team-logo"
                     />
 
-                    {team.name}
+                    <span>
+                      {team.name}
+                    </span>
                   </div>
 
                   <div className="team-stats">
@@ -247,6 +261,8 @@ export default function StandingsView({ teams }) {
                     <span>
                       {team.pct}
                     </span>
+
+                    <span></span>
 
                     <span className="proj">
                       {
@@ -264,49 +280,93 @@ export default function StandingsView({ teams }) {
               Wild Card Race
             </h2>
 
+            <div className="division-header">
+              <span>Team</span>
+
+              <div className="stats-header">
+                <span>W</span>
+                <span>L</span>
+                <span>PCT</span>
+                <span>WCGB</span>
+                <span>PROJ</span>
+              </div>
+            </div>
+
             {wildCardTeams.map(
-              (team, index) => (
-                <div
-                  key={team.id}
-                >
-                  {index === 3 && (
-                    <div className="wildcard-cutoff" />
-                  )}
+              (team, index) => {
+                const wcgb =
+                  team.id ===
+                  thirdWildCard.id
+                    ? "-"
+                    : (() => {
+                        const gb =
+                          (
+                            (
+                              thirdWildCard.wins -
+                              team.wins +
+                              team.losses -
+                              thirdWildCard.losses
+                            ) /
+                            2
+                          );
 
-                  <div className="division-row">
-                    <div className="division-team">
-                      <img
-                        src={`https://www.mlbstatic.com/team-logos/${team.id}.svg`}
-                        className="team-logo"
-                      />
-
-                      <span>
-                        {team.name}
-                      </span>
-                    </div>
-
-                    <div className="team-stats">
-                      <span>
-                        {team.wins}
-                      </span>
-
-                      <span>
-                        {team.losses}
-                      </span>
-
-                      <span>
-                        {team.pct}
-                      </span>
-
-                      <span className="proj">
-                        {
-                          team.projectedWins
+                        if (gb < 0) {
+                          return `+${Math.abs(
+                            gb
+                          ).toFixed(1)}`;
                         }
-                      </span>
+
+                        return gb.toFixed(1);
+                      })();
+
+                return (
+                  <div
+                    key={team.id}
+                  >
+                    {index === 3 && (
+                      <div className="wildcard-cutoff" />
+                    )}
+
+                    <div className="division-row">
+                      <div className="division-team">
+                        <img
+                          src={`https://www.mlbstatic.com/team-logos/${team.id}.svg`}
+                          alt={team.name}
+                          className="team-logo"
+                        />
+
+                        <span>
+                          {team.name}
+                        </span>
+                      </div>
+
+                      <div className="team-stats">
+                        <span>
+                          {team.wins}
+                        </span>
+
+                        <span>
+                          {team.losses}
+                        </span>
+
+                        <span>
+                          {team.pct}
+                        </span>
+
+                        <span>
+                          {wcgb}
+                        </span>
+
+                        <span className="proj">
+                          {
+                            team.projectedWins
+                          }
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )
+                );
+              }
             )}
           </div>
 
