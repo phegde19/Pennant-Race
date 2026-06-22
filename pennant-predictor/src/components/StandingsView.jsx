@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function StandingsView({ teams }) {
   const [league, setLeague] = useState("AL");
@@ -7,6 +9,7 @@ export default function StandingsView({ teams }) {
   const filtered = teams.filter(
     team => team.league === league
   );
+  const navigate = useNavigate();
 
   const divisions =
     league === "AL"
@@ -172,9 +175,12 @@ export default function StandingsView({ teams }) {
                               className="team-logo"
                             />
 
-                            <span>
-                              {team.name}
-                            </span>
+                          <Link
+                            to={`/team/${team.id}`}
+                            className="team-link"
+                          >
+                            {team.name}
+                          </Link>
                           </div>
 
                           <div className="team-stats">
@@ -244,9 +250,14 @@ export default function StandingsView({ teams }) {
                       className="team-logo"
                     />
 
-                    <span>
-                      {team.name}
-                    </span>
+                  <button
+                    className="team-link"
+                    onClick={() =>
+                      navigate(`/team/${team.id}`)
+                    }
+                  >
+                    {team.name}
+                  </button>
                   </div>
 
                   <div className="team-stats">
@@ -335,9 +346,14 @@ export default function StandingsView({ teams }) {
                           className="team-logo"
                         />
 
-                        <span>
-                          {team.name}
-                        </span>
+                      <button
+                        className="team-link"
+                        onClick={() =>
+                          navigate(`/team/${team.id}`)
+                        }
+                      >
+                        {team.name}
+                      </button>
                       </div>
 
                       <div className="team-stats">

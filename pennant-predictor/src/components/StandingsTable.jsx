@@ -38,7 +38,14 @@ export default function StandingsTable({ teams }) {
                       className="team-logo"
                     />
 
-                    <span>{team.name}</span>
+                  <button
+                    className="team-link"
+                    onClick={() =>
+                      navigate(`/team/${team.id}`)
+                    }
+                  >
+                    {team.name}
+                  </button>
                   </div>
                 </td>
 

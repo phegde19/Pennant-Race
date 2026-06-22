@@ -223,3 +223,232 @@ body {
   border-top: 2px dashed #64748b;
   margin: .75rem 0;
 }
+
+.team-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.team-link:hover {
+  color: #60a5fa;
+}
+
+.back-link {
+  color: #60a5fa;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+.team-page-logo {
+  width: 100px;
+  height: 100px;
+}
+
+.team-overview {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+.team-stat-card {
+  background: #1e293b;
+
+  border: 1px solid #334155;
+
+  border-radius: 12px;
+
+  padding: 1rem;
+}
+
+.team-stat-card h3 {
+  color: #94a3b8;
+  margin-top: 0;
+}
+
+.team-stat-card p {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.team-roadmap {
+  background: #1e293b;
+
+  border-radius: 12px;
+
+  padding: 1.5rem;
+}
+
+.team-roadmap ul {
+  margin: 0;
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  margin-bottom: 2rem;
+}
+
+.team-page-logo {
+  width: 120px;
+  height: 120px;
+}
+
+.team-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.team-record {
+  margin: .25rem 0;
+  color: white;
+}
+
+.projected-record {
+  color: #94a3b8;
+}
+
+.team-overview {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+.team-stat-card {
+  background: #1e293b;
+
+  border: 1px solid #334155;
+
+  border-radius: 12px;
+
+  padding: 1rem;
+
+  transition: all .2s ease;
+}
+
+.team-stat-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #2563eb;
+}
+
+.team-stat-card h3 {
+  margin-top: 0;
+  color: #94a3b8;
+}
+
+.team-stat-card p {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.team-snapshot {
+  background: #1e293b;
+
+  border: 1px solid #334155;
+
+  border-radius: 12px;
+
+  padding: 1.5rem;
+
+  margin-bottom: 2rem;
+}
+
+.team-snapshot h2 {
+  margin-top: 0;
+}
+
+.snapshot-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(180px, 1fr));
+
+  gap: 1rem;
+}
+
+.snapshot-grid div {
+  display: flex;
+  flex-direction: column;
+}
+
+.snapshot-grid span {
+  color: #94a3b8;
+  font-size: .9rem;
+}
+
+.snapshot-grid strong {
+  font-size: 1.4rem;
+}
+
+.next-game-card {
+  background: #1e293b;
+
+  border: 1px solid #334155;
+
+  border-radius: 12px;
+
+  padding: 1.5rem;
+}
+
+.next-game-card h2 {
+  margin-top: 0;
+}
+
+.next-game-card p {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.positive {
+  color: #22c55e;
+}
+
+.negative {
+  color: #ef4444;
+}
+
+.next-game-content {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.game-date {
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.live-badge {
+  color: #ef4444;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.next-game-card p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}

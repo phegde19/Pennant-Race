@@ -43,9 +43,14 @@ export default function DivisionStandings({
                       alt={team.name}
                     />
   
-                    <span>
-                      {team.name}
-                    </span>
+                    <button
+                    className="team-link"
+                    onClick={() =>
+                      navigate(`/team/${team.id}`)
+                    }
+                  >
+                    {team.name}
+                  </button>
                   </div>
   
                   <span>
