@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getStandings } from "../services/mlbApi";
 
 import PredictionCard from "../components/PredictionCard";
@@ -30,40 +31,41 @@ export default function Dashboard() {
             162 - (team.wins + team.losses);
 
           const projectedWins =
-            team.wins + gamesRemaining * winPct;
+            team.wins +
+            gamesRemaining * winPct;
 
-            return {
-              id: team.team.id,
-              name: team.team.name,
-            
-              wins: team.wins,
-              losses: team.losses,
-            
-              pct: (
-                team.wins /
-                (team.wins + team.losses)
-              ).toFixed(3),
-            
-              projectedWins:
-                Math.round(projectedWins),
-            
-              projectedLosses:
-                Math.round(
-                  162 - projectedWins
-                ),
-            
-              winPct,
-            
-              division:
-                divisionNames[
-                  record.division.id
-                ],
-            
-              league:
-                record.league.id === 103
-                  ? "AL"
-                  : "NL"
-            };
+          return {
+            id: team.team.id,
+            name: team.team.name,
+
+            wins: team.wins,
+            losses: team.losses,
+
+            pct: (
+              team.wins /
+              (team.wins + team.losses)
+            ).toFixed(3),
+
+            projectedWins:
+              Math.round(projectedWins),
+
+            projectedLosses:
+              Math.round(
+                162 - projectedWins
+              ),
+
+            winPct,
+
+            division:
+              divisionNames[
+                record.division.id
+              ],
+
+            league:
+              record.league.id === 103
+                ? "AL"
+                : "NL"
+          };
         })
       );
 
@@ -90,28 +92,28 @@ export default function Dashboard() {
     <div className="container">
       <header className="hero">
         <h1>⚾ Pennant Predictor</h1>
+
         <p>
           Forecasting MLB's race to October
         </p>
+
+        <Link
+          to="/playoffs"
+          className="playoff-button"
+        >
+          View Projected Playoffs
+        </Link>
       </header>
 
       <div className="stats-grid">
         <PredictionCard
           title="Best Projection"
-          value={`${best.name} ${Math.round(
-            best.projectedWins
-          )}-${Math.round(
-            best.projectedLosses
-          )}`}
+          value={`${best.name} ${best.projectedWins}-${best.projectedLosses}`}
         />
 
         <PredictionCard
           title="Worst Projection"
-          value={`${worst.name} ${Math.round(
-            worst.projectedWins
-          )}-${Math.round(
-            worst.projectedLosses
-          )}`}
+          value={`${worst.name} ${worst.projectedWins}-${worst.projectedLosses}`}
         />
 
         <PredictionCard

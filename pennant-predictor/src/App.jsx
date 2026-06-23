@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import PlayoffsPage from "./pages/PlayoffsPage";
 import Dashboard from "./pages/Dashboard";
 import TeamPage from "./pages/TeamPage";
 
@@ -15,6 +15,11 @@ function App() {
         <Route
           path="/team/:teamId"
           element={<TeamPage />}
+        />
+
+        <Route
+          path="/playoffs"
+          element={<PlayoffsPage />}
         />
       </Routes>
     </BrowserRouter>
